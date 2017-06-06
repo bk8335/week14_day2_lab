@@ -9,7 +9,7 @@ class FilmContainer extends React.Component {
     super(props);
     this.state = {
       films: [],
-      actors: ["Morgan Freeman", "Matt Damon", "Adam Sandler", "Will Smith"],
+      actors: ["Morgan Freeman", "Matt Damon", "Adam Sandler", "Will Smith", "Mark Wahlberg"],
       selectedFilm: null
     };
     this.setSelectedFilm = this.setSelectedFilm.bind(this);

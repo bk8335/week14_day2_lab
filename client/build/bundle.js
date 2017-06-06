@@ -22082,7 +22082,7 @@ var FilmContainer = function (_React$Component) {
 
     _this.state = {
       films: [],
-      actors: ["Morgan Freeman", "Matt Damon", "Adam Sandler", "Will Smith"],
+      actors: ["Morgan Freeman", "Matt Damon", "Adam Sandler", "Will Smith", "Mark Wahlberg"],
       selectedFilm: null
     };
     _this.setSelectedFilm = _this.setSelectedFilm.bind(_this);
