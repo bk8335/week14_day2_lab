@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FilmContainer from './containers/FilmContainer.jsx'
 
-window.addEventListener('load', () => {
-  const targetDiv = document.getElementById('app');
-  ReactDOM.render(<h1> App Started </h1>, targetDiv);
-});
+window.onload = function () {
+  ReactDOM.render(
+    <FilmContainer />,
+    document.getElementById('app')
+  );
+};
