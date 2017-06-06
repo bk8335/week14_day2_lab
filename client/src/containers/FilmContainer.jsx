@@ -16,7 +16,7 @@ class FilmContainer extends React.Component {
     return (
       <div>
         <h1>Morgan Freeman's Films</h1>
-        <FilmSelector />
+        <FilmSelector films = {this.state.films} onSelectFilm = {this.setSelectedFilm} />
         <FilmDetail />
       </div>
     );
