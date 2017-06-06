@@ -22060,6 +22060,10 @@ var _FilmSelector = __webpack_require__(184);
 
 var _FilmSelector2 = _interopRequireDefault(_FilmSelector);
 
+var _ActorSelector = __webpack_require__(185);
+
+var _ActorSelector2 = _interopRequireDefault(_ActorSelector);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22078,9 +22082,11 @@ var FilmContainer = function (_React$Component) {
 
     _this.state = {
       films: [],
+      actors: ["Morgan Freeman", "Matt Damon", "Adam Sandler"],
       selectedFilm: null
     };
     _this.setSelectedFilm = _this.setSelectedFilm.bind(_this);
+    _this.setSelectedActor = _this.setSelectedActor.bind(_this);
     return _this;
   }
 
@@ -22093,18 +22099,19 @@ var FilmContainer = function (_React$Component) {
         _react2.default.createElement(
           "h1",
           null,
-          "Morgan Freeman's Films"
+          "Netflix API"
         ),
+        _react2.default.createElement(_ActorSelector2.default, { actors: this.state.actors, onSelectActor: this.setSelectedActor }),
         _react2.default.createElement(_FilmSelector2.default, { films: this.state.films, onSelectFilm: this.setSelectedFilm }),
         _react2.default.createElement(_FilmDetail2.default, { film: this.state.selectedFilm })
       );
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
+    key: "getData",
+    value: function getData(name) {
       var _this2 = this;
 
-      var url = "http://netflixroulette.net/api/api.php?actor=Morgan%20Freeman";
+      var url = "http://netflixroulette.net/api/api.php?actor=" + name;
       var request = new XMLHttpRequest();
       request.open("GET", url);
 
@@ -22118,9 +22125,20 @@ var FilmContainer = function (_React$Component) {
       request.send();
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getData("Morgan Freeman");
+    }
+  }, {
     key: "setSelectedFilm",
     value: function setSelectedFilm(film) {
       this.setState({ selectedFilm: film });
+    }
+  }, {
+    key: "setSelectedActor",
+    value: function setSelectedActor(actor) {
+      this.setState({ selectedActor: actor });
+      this.getData(actor);
     }
   }]);
 
@@ -22278,6 +22296,81 @@ var FilmSelector = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = FilmSelector;
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(81);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ActorSelector = function (_React$Component) {
+  _inherits(ActorSelector, _React$Component);
+
+  function ActorSelector(props) {
+    _classCallCheck(this, ActorSelector);
+
+    var _this = _possibleConstructorReturn(this, (ActorSelector.__proto__ || Object.getPrototypeOf(ActorSelector)).call(this, props));
+
+    _this.state = {
+      selectedIndex: ""
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(ActorSelector, [{
+    key: "render",
+    value: function render() {
+
+      var options = this.props.actors.map(function (actor, index) {
+        return _react2.default.createElement(
+          "option",
+          { value: index, key: index },
+          " ",
+          actor
+        );
+      });
+
+      return _react2.default.createElement(
+        "select",
+        { id: "actors", onChange: this.handleChange, value: this.state.selectedIndex },
+        options
+      );
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var index = event.target.value;
+      this.setState({ selectedIndex: index });
+
+      var actor = this.props.actors[index];
+      this.props.onSelectActor(actor);
+    }
+  }]);
+
+  return ActorSelector;
+}(_react2.default.Component);
+
+exports.default = ActorSelector;
 
 /***/ })
 /******/ ]);
